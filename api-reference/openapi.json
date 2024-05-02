@@ -1,32 +1,27 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "One Click Apply API"
+    "title": "One Click Apply API",
+    "description": "An API for applying to any job",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
   },
-  "version": "1.0.0",
   "servers": [
     {
       "url": "https://api.redantai.com/"
     }
   ],
   "paths": {
-    "/": {
-      "get": {
-        "summary": "Home endpoint",
-        "responses": {
-          "200": {
-            "description": "Welcome message"
-          }
-        }
-      }
-    },
     "/api/v1/apps": {
       "get": {
-        "summary": "Get all applications",
+        "description": "Returns all applications submitted through the user's API",
         "parameters": [
           {
-            "in": "header",
             "name": "API-Key",
+            "in": "header",
+            "description": "User's API key",
             "required": true,
             "schema": {
               "type": "string"
@@ -35,7 +30,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of applications",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -47,8 +42,8 @@
               }
             }
           },
-          "403": {
-            "description": "API key does not exist",
+          "400": {
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -59,72 +54,74 @@
           }
         }
       }
-    },    
+    },
     "/api/v1/app/{app_id}": {
       "get": {
-        "summary": "Get details of a specific application",
+        "description": "Gets details of an application based on the ID supplied",
         "parameters": [
           {
-            "name": "app_id",
-            "in": "path",
+            "name": "API-Key",
+            "in": "header",
+            "description": "User's API key",
             "required": true,
-            "description": "ID of the application",
             "schema": {
               "type": "string"
             }
           },
           {
-            "in": "header",
-            "name": "API-Key",
+            "name": "app_id",
+            "in": "path",
+            "description": "ID of application to get details",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int64"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Details of the application"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application"
+                }
+              }
+            }
           },
-          "403": {
-            "description": "API key does not exist"
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
     },
     "/api/v1/apply": {
       "post": {
-        "summary": "Process incoming requests",
+        "description": "Applies to job based on job link, resume, and user details",
         "requestBody": {
-          "required": true,
+          "description": "Job to be applied to",
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "job_link": {
-                    "type": "string"
-                  },
-                  "content": {
-                    "type": "string"
-                  },
-                  "resume": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "job_link",
-                  "content",
-                  "resume"
-                ]
+                "$ref": "#/components/schemas/Apply"
               }
             }
-          }
+          },
+          "required": true
         },
         "parameters": [
           {
-            "in": "header",
             "name": "API-Key",
+            "in": "header",
+            "description": "User's API key",
             "required": true,
             "schema": {
               "type": "string"
@@ -133,21 +130,124 @@
         ],
         "responses": {
           "200": {
-            "description": "Application results"
+            "description": "Plant deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application"
+                }
+              }
+            }
           },
           "400": {
-            "description": "Bad request"
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           },
           "403": {
-            "description": "API key does not exist"
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           },
           "429": {
-            "description": "Out of API credits"
-          },
-          "500": {
-            "description": "Internal server error"
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Application": {
+        "required": ["app_id", "app_url", "status", "status_code", "time"],
+        "type": "object", 
+        "properties": {
+          "app_id": {
+            "description": "The ID of the application in our records.",
+            "type": "integer"
+          },
+          "app_url": {
+            "description": "The URL of the job applied to.",
+            "type": "string"  
+          },
+          "status": {
+            "description": "The status of the application. There are three possible values: `FAILED`, `SUCCESSFUL` and `RUNNING`.",
+            "type": "string"
+          },
+          "status_code": {
+            "description": "The status code of the application.",
+            "type": "integer"
+          },
+          "time": {
+            "description": "The timestamp of the application status.",
+            "type": "string"
+          }
+        }
+      },
+      "Apply": {
+        "allOf": [
+          {
+            "required": [
+              "job_link",
+              "resume",
+              "content"
+            ],
+            "type": "object",
+            "properties": {
+              "job link": {
+                "description": "Link to  job posting.",
+                "type": "string"
+              },
+              "content": {
+                "description": "User's information and custom information.",
+                "type": "string"
+              },
+               "resume": {
+                "description": "User's Resume.",
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "Error": {
+        "required": [
+          "status",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   }
