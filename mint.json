@@ -77,9 +77,10 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/endpoint/apply",
+        "api-reference/endpoint/list_apps",
+        "api-reference/endpoint/get_apps"
+        
       ]
     }
   ],
