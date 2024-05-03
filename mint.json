@@ -35,17 +35,12 @@
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "url": "https://docs.redantai.com/introduction"
     },
     {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "name": "API Reference",
+      "icon": "code",
+      "url": "https://docs.redantai.com/api-reference/introduction"
     }
   ],
   "navigation": [
@@ -69,7 +64,7 @@
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "API Reference",
       "pages": [
         "api-reference/introduction"
       ]
@@ -79,8 +74,8 @@
       "pages": [
         "api-reference/endpoint/apply",
         "api-reference/endpoint/list_apps",
-        "api-reference/endpoint/get_apps"
-        
+        "api-reference/endpoint/get_apps",
+        "api-reference/endpoint/get_credits"
       ]
     }
   ],

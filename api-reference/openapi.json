@@ -51,6 +51,67 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/credits": {
+      "get": {
+        "description": "Returns user's remaning credits",
+        "parameters": [
+          {
+            "name": "API-Key",
+            "in": "header",
+            "description": "User's API key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Credits"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -91,6 +152,16 @@
             }
           },
           "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
             "description": "unexpected error",
             "content": {
               "application/json": {
@@ -235,11 +306,37 @@
         "type": "object",
         "properties": {
           "status": {
+            "description": "Error code",
             "type": "integer",
             "format": "int32"
           },
           "message": {
+            "description": "Messagr from server - usually success or error",
             "type": "string"
+          }
+        }
+      },
+      "Credits": {
+        "required": [
+          "status",
+          "message",
+          "credits"
+        ],
+        "type": "object",
+        "properties": {
+          "credits": {
+            "description": "Number of credits user has left",
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "description": "Message from server - usually success or error",
+            "type": "string"
+          },
+          "status": {
+            "description": "Error code",
+            "type": "integer",
+            "format": "int32"
           }
         }
       }
