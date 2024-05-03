@@ -17,13 +17,13 @@
   },
   "topbarLinks": [
     {
-      "name": "Suppot",
-      "url": "mailto:hi@mintlify.com"
+      "name": "Support",
+      "url": "mailto:dada@redantai.com"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://oca.rednantai.com"
   },
   "tabs": [
     {
@@ -45,22 +45,11 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "General",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
-      ]
-    },
-    {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "pricing",
+        "support"
       ]
     },
     {
