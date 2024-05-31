@@ -267,7 +267,7 @@
             "type": "integer"
           },
           "ai_response": {
-            "description": "A list of AI responses to the application.",
+            "description": "A list of the submitted responses to the application.",
             "type": "array"
           },
           "time": {
