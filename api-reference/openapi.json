@@ -247,7 +247,7 @@
   "components": {
     "schemas": {
       "Application": {
-        "required": ["app_id", "app_url", "status", "status_code", "time"],
+        "required": ["app_id", "app_url", "status", "status_code",  "ai_response", "time"],
         "type": "object", 
         "properties": {
           "app_id": {
@@ -265,6 +265,10 @@
           "status_code": {
             "description": "The status code of the application.",
             "type": "integer"
+          },
+          "ai_response": {
+            "description": "A list of AI responses to the application.",
+            "type": "array"
           },
           "time": {
             "description": "The timestamp of the application status.",
