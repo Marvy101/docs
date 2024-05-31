@@ -286,7 +286,7 @@
             ],
             "type": "object",
             "properties": {
-              "job link": {
+              "job_link": {
                 "description": "Link to  job posting.",
                 "type": "string"
               },
