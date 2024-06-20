@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://api.redantai.com/"
+      "url": "https://api.oneclickapply.co/"
     }
   ],
   "paths": {
@@ -259,7 +259,7 @@
             "type": "string"  
           },
           "status": {
-            "description": "The status of the application. There are three possible values: `FAILED`, `SUCCESSFUL` and `RUNNING`.",
+            "description": "The status of the application. There are three possible values: `FAILED`, `SUCCESSFUL` and `IN PROGRESS`.",
             "type": "string"
           },
           "status_code": {
