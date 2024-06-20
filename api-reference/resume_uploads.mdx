@@ -1,32 +1,72 @@
 ---
 title: 'Resume Uploads'
 description: 'Upload resume and get a public link'
-icon: 'file'
+icon: 'cloud-arrow-up'
 ---
 
 ## Overview
-The One Click Apply API only accepts public resume links; If you have a local file, use our /upload_resume API to upload PDF resumes, get the public URL, and use it with our Apply API .
+The One Click Apply API requires a public resume link for processing, if you have a local PDF resume file, you can use our `/upload_resume` API to upload it and get a public URL.
 
-All requests contain the following base URL:
+This public URL can then be used with our [/apply](https://docs.oneclickapply.co/api-reference/endpoint/apply) API to apply for a job.
+
+You need to authorize the call with your API Key.
+
+## Example Implementation
+- Here's a simple [JS implementation](https://replit.com/@Marvy101/OCA-uploadresume-JS) in [Replit](https://replit.com).
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+--url https://oneclickapply.co/api/v1/upload_resume \
+--header 'API-Key: YOUR_API_KEY' \
+--form 'file=@/path/to/your/Resume.pdf'
 ```
-https://api.redantai.com/
+
+```python Python
+import requests
+
+url = "https://oneclickapply.co/api/v1/upload_resume"
+api_key = "<api-key>"
+file_path = "/path/to/your/Resume.pdf"
+headers = {
+    'API-Key': api_key
+}
+files = {
+    'file': open(file_path, 'rb')
+}
+response = requests.post(url, headers=headers, files=files)
+
+print(response.json())
 ```
+</RequestExample>
 
-## Authorization
-To authenticate with the One Click Apply API, you need to add an `API-Key` header to your request. For example, if your API key is `oca_1jmGxFzT2RJBUY9wOOEC3Sg`, your header would look like this:
+<ResponseExample>
 
+```json 200
+{
+    "status": 200,
+    "message": "Resume uploaded successfully",
+    "public_url": "https://api.oneclickapply.co/resume_bucket/uidofresume"
+}
 ```
-API-Key: oca_1jmGxFzT2RJBUY9wOOEC3Sg
+```json 400
+{
+    "status": 400,
+    "message": "Invalid file format"
+}
 ```
-## Response Codes
-One Click Apply uses standard HTTP codes to indicate the success or failure of your requests.
-
-In general, `2xx` HTTP codes correspond to success, `4xx` codes are for user-related failures, and `5xx` codes are for infrastructure issues.
-
-| Status         | Description   
-| ------------- | ----------------- 
-| `200`            | Successful request.        
-| `403`            | API key does not exist.        
-| `429`            | Out of API credits.        
-| `400`            | Check that parameters are correct.              
-| `5xx`            | Internal server error.
+```json 403
+{
+    "status": 403,
+    "message": "API key does not exist"
+}
+```
+```json 500
+{
+    "status": 500,
+    "message": "Failed to upload resume",
+    "error": "Internal Server Error"
+}
+```
+</ResponseExample>
