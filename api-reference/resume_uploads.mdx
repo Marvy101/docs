@@ -1,15 +1,16 @@
 ---
 title: 'Resume Uploads'
 description: 'Upload resume and get a public link'
+
 icon: 'file'
 ---
 
 ## Overview
-The One Click Apply API requires a public resume link for processing, if you have a local PDF resume file, you can use our `/upload_resume` API to upload it and get a public URL.
+The One Click Apply API requires a a resume key. Use the `/upload_resume` API to get a key you can use with our [/apply](https://docs.oneclickapply.co/api-reference/endpoint/apply) API. 
 
-This public URL can then be used with our [/apply](https://docs.oneclickapply.co/api-reference/endpoint/apply) API to apply for a job.
+You only have to create a key for a resume once and you can reuse it as much as you want.
 
-You need to authorize the call with your API Key.
+You need to authorize the call with your API Key and it only accepts PDF or Word files.
 
 ## Example Implementation
 - Here's a simple [JS implementation](https://replit.com/@Marvy101/OCA-uploadresume-JS) in [Replit](https://replit.com).

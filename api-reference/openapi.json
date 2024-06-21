@@ -281,7 +281,7 @@
           {
             "required": [
               "job_link",
-              "resume",
+              "resume_key",
               "content"
             ],
             "type": "object",
@@ -294,8 +294,8 @@
                 "description": "User's information and custom information.",
                 "type": "string"
               },
-               "resume": {
-                "description": "User's Resume.",
+               "resume_key": {
+                "description": "User's Resume key. Can be gotten by using the `/upload` endpoint",
                 "type": "string"
               }
             }
