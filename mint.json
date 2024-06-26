@@ -66,12 +66,6 @@
         "api-reference/endpoint/get_apps",
         "api-reference/endpoint/get_credits"
       ]
-    },
-    {
-      "group": "Uploading Resume",
-      "pages": [
-        "api-reference/resume_uploads"
-      ]
     }
   ],
   "footerSocials": {
