@@ -281,7 +281,7 @@
           {
             "required": [
               "job_link",
-              "resume_string",
+              "resume_key",
               "content"
             ],
             "type": "object",
@@ -294,8 +294,8 @@
                 "description": "User's information and custom information.",
                 "type": "string"
               },
-               "resume_string": {
-                "description": "User's Resume string.",
+               "resume_key": {
+                "description": "User's Resume key.",
                 "type": "string"
               }
             }
