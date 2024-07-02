@@ -19,7 +19,7 @@ You need to authorize the call with your API Key and it only accepts PDF or Word
 
 ```bash cURL
 curl --request POST \
---url https://oneclickapply.co/api/v1/upload_resume \
+--url https://api.oneclickapply.co/api/v1/upload_resume \
 --header 'API-Key: YOUR_API_KEY' \
 --form 'file=@/path/to/your/Resume.pdf'
 ```
@@ -27,7 +27,7 @@ curl --request POST \
 ```python Python
 import requests
 
-url = "https://oneclickapply.co/api/v1/upload_resume"
+url = "https://api.oneclickapply.co/api/v1/upload_resume"
 api_key = "<api-key>"
 file_path = "/path/to/your/Resume.pdf"
 headers = {
